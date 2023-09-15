@@ -1,0 +1,62 @@
+   # 排序并分配前服务器数量个信息
+    messages.sort()
+    der_list = []
+    for i in range(1, server_num + 1):
+        if len(messages) > 0:
+            temp = messages.pop(0)
+            der_list.append([temp[0] + temp[1], temp[1], i])
+    # 遍历剩下信息找合适的服务器
+    cur_ser = 0
+    for ch in messages:
+        res_ser = [x for x in der_list if x[0] <= ch[0]]
+        if len(res_ser) == 0:
+            continue
+        te = sorted(res_ser, key=lambda x: x[2] if (x[2] > cur_ser or cur_ser == 0) else (x[2] + server_num))
+        # 按循环顺序分期服务器,修改服务器数据
+        temp_list = te.pop(0)
+        der_list.remove(temp_list)
+        der_list.append([ch[1] + ch[0], ch[1] + temp_list[1], temp_list[2]])
+        cur_ser = temp_list[2]
+    res = self.get_res(der_list)
+    return res
+# 输出结果
+def get_res(self, s):
+    res = []
+    s.sort(key=lambda x: x[1], reverse=True)
+    for ch in s:
+        if ch[1] == s[0][1]:
+            res.append(ch[2])
+    res.sort()
+    return res
+
+
+
+
+
+def get_tagged_string2(self, words: List[str], input_str: str) -> str:
+    # 找出所有关键字在输入字符串中的位置
+    index_word_input = list()
+    for word in words:
+        ms = re.finditer(word, input_str)
+        for m in ms:
+            index_word_input.append(m.span())
+    # 排序
+    index_word_input.sort(key=lambda x : x[0])
+    # 合并相邻重叠，倒序保证索引不变
+    for i in range( len(index_word_input) - 1, 0, -1):
+        cur = index_word_input[i]
+        pre = index_word_input[i-1]
+        if pre[0]<= cur[0] <= pre[1]:
+            index_word_input[i-1] = (min(pre[0],cur[0]),max(pre[1],cur[1]))
+            index_word_input.pop(i)
+    # 替换，用repl函数保证精准替换，倒序保证索引不变
+    for i in range(len(index_word_input)-1, -1, -1):
+        cur = index_word_input[i]
+        word = input_str[cur[0]:cur[1]]
+        def repl(m):
+            if m.span() == cur:
+                return ''.join(("<b>", word, "</b>"))
+            else:
+                return word
+        input_str = re.sub(word, repl, input_str)
+    return input_str
