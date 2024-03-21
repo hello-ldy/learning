@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+}
+
+img {
+    border: 0;
+}
+
+a:link, a:visited
+{
+    color: blue;
+    text-decoration: none;
+}
+
+a:hover, a:active
+{
+    color: red;
+    text-decoration: underline;
+}
+
+.monoF {
+    font-family: "Menlo", "Monaco", monospace;
+}
+
+.noWrap{
+    white-space: nowrap;
+}
+
+.highlight {
+    color: red;
+}
+
+.hCenter
+{
+    text-align: center;
+}
+
+.vTop
+{
+    vertical-align: text-top;
+}
+
+
+.strong{
+    font-weight: bolder;
+}
+
+.roundCorner{
+    -webkit-border-radius:  15px;
+    -moz-border-radius:     15px;
+    border-radius:          15px;
+}
+
+.whiteBg{
+    background-color: #FFFFFF;
+}
+
+.greyBg{
+    background-color: #EDEDED;
+}
+
+.yellowBg{
+    background-color: #FDFB03;
+}
+
+.orangeBg{
+    background-color: #FF850C;
+}
+
+.noWrap
+{
+    white-space: nowrap;
+}
+
+.Title3
+{
+    font-size: 18px;
+    font-weight: bold;
+}
